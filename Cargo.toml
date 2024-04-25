@@ -1,0 +1,21 @@
+[package]
+name = "rust_wasm"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[lib]
+crate-type = ["cdylib"]  # Compile as a dynamic system library
+
+[profile.release]
+# Optimize for size
+opt-level = "z"  # Optimize for size. 's' is also an option for size, but 'z' is often smaller
+lto = true       # Enable Link Time Optimization
+codegen-units = 1 # Reduce the number of codegen units to increase optimizations at the cost of compile time
+panic = "abort"  # Abort on panic, which can reduce binary size
+
+# Reduces binary size by stripping unnecessary information
+strip = "symbols"  
